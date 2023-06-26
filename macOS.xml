@@ -43,8 +43,8 @@
   <vcpu placement='static'>8</vcpu>
   <os>
     <type arch='x86_64' machine='pc-q35-4.2'>hvm</type>
-    <loader readonly='yes' type='pflash'>/home/qhuyduong/workspace/DarwinKVM-Monterey/OVMF_CODE.fd</loader>
-    <nvram>/home/qhuyduong/workspace/DarwinKVM-Monterey/OVMF_VARS.fd</nvram>
+    <loader readonly='yes' type='pflash'>/home/qhuyduong/workspace/KVM-hackintosh/OVMF_CODE.fd</loader>
+    <nvram>/home/qhuyduong/workspace/KVM-hackintosh/OVMF_VARS.fd</nvram>
   </os>
   <features>
     <acpi/>
@@ -62,21 +62,24 @@
     <emulator>/usr/bin/qemu-system-x86_64</emulator>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2' cache='writeback' io='threads'/>
-      <source file='/home/qhuyduong/workspace/DarwinKVM-Monterey/OpenCore.qcow2'/>
+      <source file='/home/qhuyduong/workspace/KVM-hackintosh/OpenCore.qcow2'/>
       <target dev='sda' bus='sata'/>
       <boot order='2'/>
       <address type='drive' controller='0' bus='0' target='0' unit='0'/>
     </disk>
     <disk type='file' device='disk'>
       <driver name='qemu' type='qcow2' cache='writeback' io='threads'/>
-      <source file='/home/qhuyduong/workspace/DarwinKVM-Monterey/macOS.qcow2'/>
+      <source file='/home/qhuyduong/workspace/KVM-hackintosh/macOS.qcow2'/>
       <target dev='sdb' bus='sata'/>
       <boot order='1'/>
       <address type='drive' controller='0' bus='0' target='0' unit='1'/>
     </disk>
     <disk type="file" device="disk">
       <driver name="qemu" type="raw" cache="writeback"/>
-      <source file="/home/qhuyduong/workspace/DarwinKVM-Monterey/BaseSystem.img"/>
+      <!-- If you wanna use online installation, uncomment the line below -->
+      <!-- <source file="/home/qhuyduong/workspace/KVM-hackintosh/BaseSystem.img"/> -->
+      <!-- If you wanna use offline installation iso file, uncomment the line below -->
+      <!-- <source file="/home/qhuyduong/workspace/KVM-hackintosh/macOS-Monterey.iso"/> -->
       <target dev="sdc" bus="sata"/>
       <boot order="3"/>
       <address type="drive" controller="0" bus="0" target="0" unit="2"/>
