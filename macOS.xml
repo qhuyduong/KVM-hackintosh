@@ -79,7 +79,7 @@
       <!-- If you wanna use online installation, uncomment the line below -->
       <!-- <source file="/home/qhuyduong/workspace/KVM-hackintosh/BaseSystem.img"/> -->
       <!-- If you wanna use offline installation iso file, uncomment the line below -->
-      <source file="/home/qhuyduong/workspace/KVM-hackintosh/macOS-Monterey.iso"/>
+      <source file="/home/qhuyduong/workspace/KVM-hackintosh/macOS.iso"/>
       <target dev="sdc" bus="sata"/>
       <boot order="3"/>
       <address type="drive" controller="0" bus="0" target="0" unit="2"/>
