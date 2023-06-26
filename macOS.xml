@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
-<!--
+<domain type='kvm'
+  xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <!--
 	macOS libvirt XML configuration.
 
 	Run "virt-xml-validate macOS-libvirt-Catalina.xml" to validate this file.
@@ -37,12 +38,11 @@
   <name>macOS</name>
   <uuid>2aca0dd6-cec9-4717-9ab2-0b7b13d111c3</uuid>
   <title>macOS</title>
-  <memory unit='KiB'>4194304</memory>
-  <currentMemory unit='KiB'>4194304</currentMemory>
-  <vcpu placement='static'>4</vcpu>
+  <memory unit='KiB'>8388608</memory>
+  <currentMemory unit='KiB'>8388608</currentMemory>
+  <vcpu placement='static'>8</vcpu>
   <os>
     <type arch='x86_64' machine='pc-q35-4.2'>hvm</type>
-    <!-- We don't need patched OVMF anymore when using latest OpenCore, stock one is okay -->
     <loader readonly='yes' type='pflash'>/home/qhuyduong/workspace/DarwinKVM-Monterey/OVMF_CODE.fd</loader>
     <nvram>/home/qhuyduong/workspace/DarwinKVM-Monterey/OVMF_VARS.fd</nvram>
   </os>
@@ -138,7 +138,6 @@
       <master startport='4'/>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x07' function='0x2'/>
     </controller>
-    <!-- Make sure you put your nic in bus 0x0 and slot 0x0y(y is numeric), this will make nic built-in and apple-store work-->
     <interface type="bridge">
       <mac address="52:54:00:e6:85:40"/>
       <source bridge="virbr0"/>
@@ -163,34 +162,8 @@
     <video>
       <model type="vga" vram="65536" heads="1" primary="yes"/>
     </video>
-    <!-- If you wanna passthrough GPU, make sure the gfx and audio are in the same bus (like 0x01) but different function (0x00 and 0x01)-->
-    <!-- <hostdev mode='subsystem' type='pci' managed='yes'>
-      <driver name='vfio'/>
-      <source>
-        <address domain='0x0000' bus='0x2d' slot='0x00' function='0x0'/>
-      </source>
-      <rom file='/mnt/disks/backups/BIOS/RX580/Ellesmere.rom'/>
-      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x0' multifunction='on'/>
-    </hostdev>
-    <hostdev mode='subsystem' type='pci' managed='yes'>
-      <driver name='vfio'/>
-      <source>
-        <address domain='0x0000' bus='0x2d' slot='0x00' function='0x1'/>
-      </source>
-      <address type='pci' domain='0x0000' bus='0x01' slot='0x00' function='0x1'/>
-    </hostdev> -->
-    <!-- If you wanna passthrough onboard audio(like 30:00.4), make sure you put it in bus 0x00 and slot 0x0y(y is numeric), otherwise AppleALC won't recognized it -->
-    <!-- <hostdev mode='subsystem' type='pci' managed='yes'>
-      <driver name='vfio'/>
-      <source>
-        <address domain='0x0000' bus='0x30' slot='0x00' function='0x4'/>
-      </source>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x08' function='0x0'/>
-    </hostdev> -->
     <memballoon model='none'/>
   </devices>
-  <!-- Note: Enable the next line when SELinux is enabled -->
-  <!-- seclabel type='dynamic' model='selinux' relabel='yes'/> -->
   <qemu:commandline>
     <qemu:arg value='-device'/>
     <qemu:arg value='isa-applesmc,osk=ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc'/>
@@ -202,10 +175,10 @@
     <qemu:arg value='-device'/>
     <qemu:arg value='usb-kbd'/>
     <qemu:arg value='-cpu'/>
-    <qemu:arg value='Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check'/>
+    <!-- <qemu:arg value='Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check'/> -->
     <!-- <qemu:arg value='Penryn,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
     <!-- If you wanna use cpu host-passthrough mode, uncomments below-->
-    <!-- <qemu:arg value='host,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
+    <qemu:arg value='host,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/>
     <!-- If you wanna use cpu emulating mode like Skylake-Server, uncomments below-->
     <!-- <qemu:arg value='Skylake-Server,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
   </qemu:commandline>
