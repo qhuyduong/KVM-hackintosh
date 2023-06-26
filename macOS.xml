@@ -79,7 +79,7 @@
       <!-- If you wanna use online installation, uncomment the line below -->
       <!-- <source file="/home/qhuyduong/workspace/KVM-hackintosh/BaseSystem.img"/> -->
       <!-- If you wanna use offline installation iso file, uncomment the line below -->
-      <!-- <source file="/home/qhuyduong/workspace/KVM-hackintosh/macOS-Monterey.iso"/> -->
+      <source file="/home/qhuyduong/workspace/KVM-hackintosh/macOS-Monterey.iso"/>
       <target dev="sdc" bus="sata"/>
       <boot order="3"/>
       <address type="drive" controller="0" bus="0" target="0" unit="2"/>
@@ -178,11 +178,6 @@
     <qemu:arg value='-device'/>
     <qemu:arg value='usb-kbd'/>
     <qemu:arg value='-cpu'/>
-    <!-- <qemu:arg value='Penryn,kvm=on,vendor=GenuineIntel,+invtsc,vmware-cpuid-freq=on,+ssse3,+sse4.2,+popcnt,+avx,+aes,+xsave,+xsaveopt,check'/> -->
-    <!-- <qemu:arg value='Penryn,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
-    <!-- If you wanna use cpu host-passthrough mode, uncomments below-->
     <qemu:arg value='host,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/>
-    <!-- If you wanna use cpu emulating mode like Skylake-Server, uncomments below-->
-    <!-- <qemu:arg value='Skylake-Server,vendor=GenuineIntel,+hypervisor,+invtsc,kvm=on,+fma,+avx,+avx2,+aes,+ssse3,+sse4_2,+popcnt,+sse4a,+bmi1,+bmi2'/> -->
   </qemu:commandline>
 </domain>
