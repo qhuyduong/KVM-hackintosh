@@ -1,5 +1,4 @@
-<domain type='kvm'
-  xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
   <name>macOS</name>
   <uuid>2aca0dd6-cec9-4717-9ab2-0b7b13d111c3</uuid>
   <title>macOS</title>
@@ -43,7 +42,7 @@
     </disk>
     <disk type='file' device='disk'>
       <driver name='qemu' type='raw'/>
-      <source file="/home/qhuyduong/workspace/KVM-hackintosh/BaseSystem.img"/>
+      <source file='/home/qhuyduong/workspace/KVM-hackintosh/BaseSystem.img'/>
       <target dev='vdc' bus='virtio'/>
       <address type='pci' domain='0x0000' bus='0x02' slot='0x00' function='0x0'/>
     </disk>
