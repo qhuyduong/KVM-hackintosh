@@ -1,3 +1,5 @@
-BaseSystem.*
-mnt
+*.dmg
+*.img
+*.iso
 *.qcow2
+mnt
