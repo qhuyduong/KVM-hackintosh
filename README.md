@@ -6,13 +6,9 @@ Credits to [DarwinKVM](https://github.com/royalgraphx/DarwinKVM) for the detaile
 
 ```
 qemu-img create -f qcow2 OpenCore.qcow2 200M
-modprobe nbd max_part=8
-qemu-nbd --connect=/dev/nbd0 OpenCore.qcow2
-gdisk
-/dev/nbd0
-w
-y
-gdisk
+sudo modprobe nbd max_part=8
+sudo qemu-nbd --connect=/dev/nbd0 OpenCore.qcow2
+sudo gdisk
 /dev/nbd0
 n
 1
@@ -21,5 +17,5 @@ n
 EF00
 w
 y
-mkfs.fat -F 32 /dev/nbd0p1
+sudo mkfs.fat -F 32 -n EFI /dev/nbd0p1
 ```
