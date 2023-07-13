@@ -229,10 +229,10 @@
 	<dict>
 		<key>Add</key>
 		<dict>
-			<key>PciRoot(0x0)/Pci(0x1b,0x0)</key>
+			<key>PciRoot(0x1)/Pci(0x3,0x0)</key>
 			<dict>
 				<key>layout-id</key>
-				<data>AQAAAA==</data>
+				<data>CwAAAA==</data>
 			</dict>
 		</dict>
 		<key>Delete</key>
