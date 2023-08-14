@@ -1,9 +1,5 @@
 #!/bin/bash
 
-IF=wlp1s0
-
-sudo ./bridge.sh $IF
-
 qemu-system-x86_64 \
     -enable-kvm \
     -m 4G \
@@ -23,5 +19,3 @@ qemu-system-x86_64 \
     -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27 \
     -drive id=ESP,if=virtio,format=qcow2,file=OpenCore.qcow2 \
     -drive id=macOS,if=virtio,format=qcow2,file=macOS.qcow2 \
-
-sudo ./unbridge.sh $IF
