@@ -9,13 +9,14 @@ qemu-system-x86_64 \
     -smbios type=2 \
     -nodefaults \
     -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" \
-    -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
-    -drive if=pflash,format=raw,file=OVMF_VARS.fd \
+    -display gtk,zoom-to-fit=on \
     -vga qxl \
     -usb \
     -device usb-kbd \
     -device usb-mouse \
-    -netdev tap,id=net0,ifname=tap0,script=no,downscript=no \
-    -device vmxnet3,netdev=net0,id=net0,mac=52:54:00:c9:18:27 \
+    -device virtio-net,netdev=vmnic \
+    -netdev user,id=vmnic,hostfwd=tcp:127.0.0.1:9001-:22 \
+    -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
+    -drive if=pflash,format=raw,file=OVMF_VARS.fd \
     -drive id=ESP,if=virtio,format=qcow2,file=OpenCore.qcow2 \
     -drive id=macOS,if=virtio,format=qcow2,file=macOS.qcow2 \
