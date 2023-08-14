@@ -11,7 +11,7 @@ qemu-system-x86_64 \
     -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" \
     -display gtk,zoom-to-fit=on \
     -vga qxl \
-    -usb \
+    -device qemu-xhci \
     -device usb-kbd \
     -device usb-mouse \
     -device virtio-net,netdev=vmnic \
