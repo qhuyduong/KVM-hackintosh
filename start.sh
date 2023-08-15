@@ -20,3 +20,4 @@ qemu-system-x86_64 \
     -drive if=pflash,format=raw,file=OVMF_VARS.fd \
     -drive id=ESP,if=virtio,format=qcow2,file=OpenCore.qcow2 \
     -drive id=macOS,if=virtio,format=qcow2,file=macOS.qcow2 \
+    #-device vfio-pci,host=03:00.4,multifunction=on \
