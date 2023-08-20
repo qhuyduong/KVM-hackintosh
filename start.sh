@@ -2,11 +2,12 @@
 
 VFIO_PCI_HOSTS=()
 
-while getopts 'hp:' opt
+while getopts 'hp:s' opt
 do
     case $opt in
         h) HEADLESS=true;;
         p) VFIO_PCI_HOSTS+=($OPTARG);;
+        s) SERIAL=true;;
     esac
 done
 
@@ -19,7 +20,6 @@ ARGS=(
     -smbios type=2 \
     -nodefaults \
     -display gtk,zoom-to-fit=on \
-    -serial stdio \
     -vga qxl \
     -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" \
     -device qemu-xhci \
@@ -42,6 +42,10 @@ ARGS=(
     do
 	ARGS+=(-device vfio-pci,host=$value,multifunction=on)
     done
+}
+
+[[ $SERIAL == true ]] && {
+    ARGS+=(-serial stdio)
 }
 
 qemu-system-x86_64 "${ARGS[@]}"
