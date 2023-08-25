@@ -40,7 +40,7 @@ ARGS=(
 [[ $VFIO_PCI_HOSTS ]] && {
     for value in "${VFIO_PCI_HOSTS[@]}"
     do
-	ARGS+=(-device vfio-pci,host=$value,multifunction=on)
+	ARGS+=(-device vfio-pci,host=$value,multifunction=on,bus=pcie.0,addr=04.0)
     done
 }
 
