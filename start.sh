@@ -22,9 +22,9 @@ ARGS=(
     -display gtk,zoom-to-fit=on \
     -vga qxl \
     -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" \
-    -device qemu-xhci \
+    -usb \
     -device usb-kbd \
-    -device usb-mouse \
+    -device usb-tablet \
     -device virtio-net,netdev=vmnic \
     -netdev user,id=vmnic,hostfwd=tcp:127.0.0.1:9001-:22 \
     -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
