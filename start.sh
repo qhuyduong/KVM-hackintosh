@@ -16,7 +16,7 @@ ARGS=(
     -m 4G \
     -machine q35,accel=kvm \
     -smp 8,cores=4 \
-    -cpu Haswell,vendor=GenuineIntel,kvm=on,+invtsc \
+    -cpu host,+invtsc,+svm \
     -smbios type=2 \
     -nodefaults \
     -display gtk,zoom-to-fit=on \
