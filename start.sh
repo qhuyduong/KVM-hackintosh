@@ -15,8 +15,8 @@ ARGS=(
     -enable-kvm \
     -m 4G \
     -machine q35,accel=kvm \
-    -smp 8,cores=4 \
-    -cpu host,+invtsc,+svm \
+    -smp 1 \
+    -cpu host,+invtsc \
     -smbios type=2 \
     -nodefaults \
     -display gtk,zoom-to-fit=on \
