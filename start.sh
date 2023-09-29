@@ -16,7 +16,7 @@ ARGS=(
     -m 4G \
     -machine q35,accel=kvm \
     -smp 1 \
-    -cpu host,+invtsc \
+    -cpu host,+invtsc,+svm \
     -smbios type=2 \
     -nodefaults \
     -display gtk,zoom-to-fit=on \
