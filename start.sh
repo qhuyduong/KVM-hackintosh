@@ -2,12 +2,13 @@
 
 VFIO_PCI_HOSTS=()
 
-while getopts 'hp:s' opt
+while getopts 'hp:sa' opt
 do
     case $opt in
         h) HEADLESS=true;;
         p) VFIO_PCI_HOSTS+=($OPTARG);;
         s) SERIAL=true;;
+	a) AMD=true;;
     esac
 done
 
@@ -15,8 +16,6 @@ ARGS=(
     -enable-kvm \
     -m 4G \
     -machine q35,accel=kvm \
-    -smp 1 \
-    -cpu host,+invtsc,+svm \
     -smbios type=2 \
     -nodefaults \
     -display gtk,zoom-to-fit=on \
@@ -47,5 +46,12 @@ ARGS=(
 [[ $SERIAL == true ]] && {
     ARGS+=(-serial stdio)
 }
+
+if [[ $AMD == true ]]
+then
+    ARGS+=(-smp 1 -cpu host,+invtsc,+svm)
+else
+    ARGS+=(-smp 16 -cpu Haswell,vendor=GenuineIntel,kvm=on,+invtsc)
+fi
 
 qemu-system-x86_64 "${ARGS[@]}"
