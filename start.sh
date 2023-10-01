@@ -28,7 +28,6 @@ ARGS=(
     -netdev user,id=vmnic,hostfwd=tcp:127.0.0.1:9001-:22 \
     -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
     -drive if=pflash,format=raw,file=OVMF_VARS.fd \
-    -drive id=ESP,if=virtio,format=qcow2,file=OpenCore.qcow2 \
     -drive id=macOS,if=virtio,format=qcow2,file=macOS.qcow2 \
 )
 
@@ -49,9 +48,17 @@ ARGS=(
 
 if [[ $AMD == true ]]
 then
-    ARGS+=(-smp 1 -cpu host,+invtsc,+svm)
+    ARGS+=(
+	-smp 1 \
+	-cpu host,+invtsc,+svm \
+	-drive id=ESP,if=virtio,format=qcow2,file=OpenCore_amd.qcow2 \
+    )
 else
-    ARGS+=(-smp 16 -cpu Haswell,vendor=GenuineIntel,kvm=on,+invtsc)
+    ARGS+=(
+	-smp 16 \
+	-cpu Haswell,vendor=GenuineIntel,kvm=on,+invtsc \
+	-drive id=ESP,if=virtio,format=qcow2,file=OpenCore_intel.qcow2 \
+    )
 fi
 
 qemu-system-x86_64 "${ARGS[@]}"

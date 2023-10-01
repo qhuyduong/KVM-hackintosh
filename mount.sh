@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ $# -lt 1 ]
+then
+    echo "./mount.sh <img>.qcow2"
+    exit 1
+fi
+
+IMG=$1
+
 # Check if nbd module is already loaded
 if lsmod | grep -q "^nbd"; then
     echo "nbd module is already loaded. Proceeding..."
@@ -14,7 +22,7 @@ if lsblk -o NAME | grep -q "^nbd0$"; then
     sudo qemu-nbd --disconnect /dev/nbd0
 fi
 
-sudo qemu-nbd --connect=/dev/nbd0 OpenCore.qcow2
+sudo qemu-nbd --connect=/dev/nbd0 "$IMG"
 echo "Connected /dev/nbd0."
 
 # Create "mnt" directory if it doesn't exist
