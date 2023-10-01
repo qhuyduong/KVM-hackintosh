@@ -56,7 +56,7 @@ then
 else
     ARGS+=(
 	-smp 16 \
-	-cpu Haswell,vendor=GenuineIntel,kvm=on,+invtsc \
+	-cpu Haswell,vendor=GenuineIntel,+invtsc,-pcid,-hle,-rtm  \
 	-drive id=ESP,if=virtio,format=qcow2,file=OpenCore_intel.qcow2 \
     )
 fi
