@@ -18,12 +18,7 @@ ARGS=(
     -machine q35,accel=kvm \
     -smbios type=2 \
     -nodefaults \
-    -display gtk,zoom-to-fit=on \
-    -vga qxl \
     -device isa-applesmc,osk="ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc" \
-    -usb \
-    -device usb-kbd \
-    -device usb-tablet \
     -device virtio-net,netdev=vmnic \
     -netdev user,id=vmnic,hostfwd=tcp:127.0.0.1:9001-:22 \
     -drive if=pflash,format=raw,readonly=on,file=OVMF_CODE.fd \
@@ -31,9 +26,18 @@ ARGS=(
     -drive id=macOS,if=virtio,format=qcow2,file=macOS.qcow2 \
 )
 
-[[ $HEADLESS == true ]] && {
+if [[ $HEADLESS == true ]]
+then
     ARGS+=(-nographic -vnc :0 -k en-us)
-}
+else
+    ARGS+=(
+	-usb \
+	-device usb-kbd \
+	-device usb-tablet \
+	-display gtk,zoom-to-fit=on \
+	-vga qxl \
+    )
+fi
 
 [[ $VFIO_PCI_HOSTS ]] && {
     for value in "${VFIO_PCI_HOSTS[@]}"
